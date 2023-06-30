@@ -18,6 +18,8 @@ print(f'[3] DNA/RNA Transcription: {transcription(DNAStr)}\n')
 
 # Printing DNA Pattern 5'->3' with reverse complement
 print(f"[4] DNA String + Complement + Reverse Complement:\n5'{coloured(DNAStr)} 3'")
-print (f"   {''.join(['|' for c in range (len(DNAStr))])}")
 print(f"3' {reverse_complement(DNAStr)[::-1]} 5' [Complement]")
 print(f"5' {reverse_complement(DNAStr)} 3' [Rev. Complement]\n")
+print(f'[5] GC Content: {gc_content(DNAStr)}%\n')
+print(
+    f'[6] + GC Content in Subsection k = 5: {gc_content_subsec(DNAStr, k = 5)}\n')

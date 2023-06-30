@@ -18,11 +18,31 @@ def countNucFrequency (seq):
     return tmpFreqDict 
     # return dict(collections.Counter(seq))
 
-# Take the coding strand and change it to mRNA 
+
 def transcription(seq):
+    """Take the coding strand and change it to mRNA """
     """DNA -> RNA Transcription -> Replacing thymine with uracil """
     return seq.replace( "T", "U")  
 
-"""Swapping Bases using Watson-Crick Base Pairing"""
+
 def reverse_complement(seq):
-    return ''.join([DNA_ReverseComplement[nuc] for nuc in seq])[::1]
+    """Swapping Bases using Watson-Crick Base Pairing"""
+    # Not very pythonic, a very generic approach we can use 
+    # regardless of language 
+    # return ''.join([DNA_ReverseComplement[nuc] for nuc in seq])[::1]
+    # Pythonic approach: a faster, more elegant solution 
+    mapping = str.maketrans("ATCG", "TAGC")
+    return seq.translate(mapping)[::-1]
+
+def gc_content (seq): 
+    
+    """Calculating the GC content in a DNA/RNA sequence as a percentage """
+    return round ((seq.count('C') + seq.count('G'))/len(seq)* 100)
+
+def gc_content_subsec(seq, k=20):
+    """GC content in a DNA/RNA sub-sequences with length k, k=20 by deafault"""
+    res = []
+    for i in range (0, len(seq)-k + 1, k ):
+        subseq = seq[i:i + k]
+        res.append(gc_content(subseq))
+    return res
